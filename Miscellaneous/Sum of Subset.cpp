@@ -15,7 +15,7 @@ void SumOfSubset(int s,int k,int r)
         SumOfSubset( s + w[k] , k+1, r - w[k] );
 
    if( ( s + r - w[k] >= m ) && ( s + w[k+1] ) <= m ){
-      Vis[k] = 0;
+      Vis[k] = false;
       SumOfSubset(s , k + 1 , r - w[k] );
    }
 }
