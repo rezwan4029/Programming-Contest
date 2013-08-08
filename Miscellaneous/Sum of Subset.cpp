@@ -1,6 +1,6 @@
 #define SZ 107
 int n , m , w[SZ], cnt ;
-bool Vis[100];
+bool Vis[SZ];
 
 void SumOfSubset(int s,int k,int r)
 {
