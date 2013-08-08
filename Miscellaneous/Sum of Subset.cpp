@@ -30,7 +30,7 @@ int main(){
     sort(w,w+n);
     scanf("%d",&m);
     if(tot < m || w[0] > m){
-            printf("No solution\n");
+         printf("No solution\n");
     }
     else{
         SumOfSubset(0,0,tot);
