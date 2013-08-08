@@ -1,22 +1,3 @@
-/*
-    Rezwan_4029
-    AUST , CSE-25
-*/
-#include <bits/stdc++.h>
-#define pb push_back
-#define ms(a,v) memset(a,v,sizeof a)
-#define II ({int a; scanf("%d", &a); a;})
-#define LL  ({ll  a; scanf("%lld", &a); a;})
-#define all(X) X.begin() , X.end()
-using namespace std;
-typedef long long ll ;
-#define rep(i,n) for( __typeof(n)i = 0 ; i < n ; i++)
-#define For(i,n) for( __typeof(n)i = 1 ; i <= n ; i++)
-#define forstl(i,n) for(__typeof(n.begin())i = n.begin();i!=n.end();i++)
-#define forab(i,a,b) for( __typeof(b) i = a ; i <= (b) ; i++ )
-#define forba(i,b,a) for( __typeof(b) i = b ; i >= (a) ; i-- )
-
-
 #define MAXN 2500010 // total size of patterns here 500 patterns  and max length of pattern is 5000 . so 500 * 5000 = 2500000
 #define CHARSET  64 // lower(26) + upper(26) + digits(10) +  and -(dash) (1) = 63
 
