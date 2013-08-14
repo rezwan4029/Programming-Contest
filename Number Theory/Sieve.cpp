@@ -2,7 +2,7 @@
 #define MAX_TOTAL 350000
 
 ll prime[PrimeLIMIT / 64], pr[MAX_TOTAL], prlen;
-
+bool isPrime[PrimeLIMIT];
 #define gP(n) (prime[n>>6]&(1<<((n>>1)&31)))
 #define rP(n) (prime[n>>6]&=~(1<<((n>>1)&31)))
 
@@ -14,5 +14,6 @@ void sieve() {
 		for( ll j = i * i, i2 = i << 1; j < PrimeLIMIT; j += i2 ) rP( j );
 	
 	pr[prlen++] = 2;
-	for(ll i = 3; i < PrimeLIMIT; i += 2 ) if( gP( i ) ) pr[ prlen++ ] = i;
+	isPrime[2] = true ;
+	for(ll i = 3; i < PrimeLIMIT; i += 2 ) if( gP( i ) ) pr[ prlen++ ] = i , isPrime[i] = true ;
 }
