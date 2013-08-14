@@ -11,7 +11,7 @@ void back(){
     }
     rep(i,len){
         if(!taken[i]){
-            taken[i] = true , ret.push_back( S[i] );
+            taken[i] = true , ret.push_back( S[i]);
             back();
             taken[i] = false , ret.pop_back();
         }
