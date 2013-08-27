@@ -1,15 +1,15 @@
 #define MAX_N 1000005
 char str [MAX_N], pat [MAX_N];
-int N, M, pi [MAX_N];
+int N, M, fail [MAX_N];
 vector <int> occurance;
 
 int failureFunction () {
-    pi[1] = 0 ;
+    fail[1] = 0 ;
     int i, shift = 0;
     for (i = 2; pat [i - 1]; ++i) {
-        while (shift > 0 && pat [shift] != pat [i - 1]) shift = pi [shift];
+        while (shift > 0 && pat [shift] != pat [i - 1]) shift = fail [shift];
         if (pat [shift] == pat [i - 1]) ++shift;
-        pi [i] = shift;
+        fail [i] = shift;
     }
     return i - 1;
 }
@@ -20,11 +20,11 @@ int KMP () {
     M = failureFunction ();
 
     for (i = 0; str [i]; ++i) {
-        while (shift > 0 && pat [shift] != str [i] ) shift = pi [shift];
+        while (shift > 0 && pat [shift] != str [i] ) shift = fail [shift];
         if (pat [shift] == str [i]) ++shift;
         if (shift == M) {
             occurance.push_back (i - M + 1); // occurance found at pos (i - M + 1)
-            shift = pi [shift];// try to find the next occurance
+            shift = fail [shift];// try to find the next occurance
         }
     }
     return i;
@@ -34,6 +34,6 @@ int main(){
     For(cs,tst){
         scanf("%s %s",&str,&pat);
 	KMP();
-	
+
     }
 }
