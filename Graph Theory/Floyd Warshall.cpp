@@ -8,7 +8,7 @@ void Reset(){
     For(i,n) For(j,n){
         if(i == j ) d[i][j] = 0 ;
         else d[i][j] = INF ;
-        pred[i][j] = 0 ;
+        pred[i][j] = -1 ;
     }
 }
 
@@ -22,7 +22,7 @@ void Warshall(){
 }
 
 void PrintPath(int i,int j){
-    if(pred[i][j] == 0 ) printf("%d %d -> ",i,j);
+    if(pred[i][j] == -1 ) printf("%d %d -> ",i,j);
     else{
         PrintPath(i,pred[i][j]);
         PrintPath(pred[i][j],j);
