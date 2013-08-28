@@ -16,8 +16,8 @@ ll solve (ll a, ll b, ll m)
 		if ( !vals.count(curr) ) vals[ curr ] = i;
 		curr = (curr * an) % m;
 	}
-    ll ans = mod ;
-    curr = b ;
+        ll ans = mod ;
+        curr = b ;
 	rep(i,n+1){
 		if ( vals.count(curr) ) {
 			 ans = min( ans , vals[ curr ] * n - i ); // finding the minimum solution
