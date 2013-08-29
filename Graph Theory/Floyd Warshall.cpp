@@ -1,7 +1,6 @@
 // Graph Represnted as adjacancy matrix
 
 #define SZ 105
-
 int n , d[SZ][SZ] , pred[SZ][SZ];
 
 void Reset(){
