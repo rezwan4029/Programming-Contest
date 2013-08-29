@@ -13,15 +13,15 @@ int prev[SZ];
 
 int Parent(int i){
     if(i==prev[i])return i;
-    return (prev[i]=Parent(prev[i]));
+    return ( prev[i] = Parent( prev[i] ) );
 }
 
 int isUnion(int a,int b){
-    return Parent(a)==Parent(b);
+    return Parent(a) == Parent(b);
 }
 
 void makeUnion(int a,int b ){
-    prev[Parent(a)] = Parent(b);
+    prev[ Parent(a) ] = Parent(b);
 }
 
 int MST(int n , edge *x , int e ){
