@@ -19,7 +19,7 @@ void Update( point a , point b) {
 
 void solve (int l, int r) {
 	if(r - l <= 3 ){
-        forab(i,l,r) forab(j,i+1,r) Update( a[i] , a[j]);
+        	forab(i,l,r) forab(j,i+1,r) Update( a[i] , a[j]);
 		sort (a+l, a+r+1,cmp_y);
 		return;
 	}
@@ -31,8 +31,8 @@ void solve (int l, int r) {
 	copy (t, t+r-l+1, a+l);
 	int tsz = 0;
 	forab(i,l,r){
-		if ( fabs (a[i].x - midX ) < minDist) {
-			for (int j = tsz-1 ; j>=0 && a[i].y - t[j].y < minDist ; j--) Update(a[i], t[j]);
+		if ( fabs ( a[i].x - midX ) < minDist) {
+			for ( int j = tsz-1 ; j >= 0 && a[i].y - t[j].y < minDist ; j--) Update(a[i], t[j]);
 			t[tsz++] = a[i];
 		}
 	}
