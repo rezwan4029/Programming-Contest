@@ -2,7 +2,6 @@ const int SZ = 100010 ;
 int n , arr[SZ] , dp[SZ];
 
 int lis() {
-
     int mxLen = 1;
     dp[0] = arr[0];
     For(i,n-1){
