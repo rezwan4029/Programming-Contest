@@ -1,4 +1,3 @@
-
 /*
  * Algorithm : Point in Polygon By ray shooting
  *             Adapted from "Computational Geometry in C" (Second Edition)
@@ -48,3 +47,22 @@ char PointInPoly( point Pt,point *Pl, long N ){
     else return 'o';
 }
 
+
+// any type
+
+bool PointInPolygoan( point p , point *Pl , int N ){
+        if ( N < 3 ) return false;
+        for (int i = 0 ; i < N - 1 ; i++ ){
+             int j = i + 1;
+             int c = cross( Pl[i], Pl[j], p );
+             int x = min( Pl[i].x, Pl[j].x );
+             int X = max( Pl[i].x, Pl[j].x );
+             int y = min( Pl[i].y, Pl[j].y );
+             int Y = max( Pl[i].y, Pl[j].y );
+
+             int d = x <= p.x && p.x <= X && y <= p.y && p.y <= Y ;
+             if ( c < 0 )    return false;
+             else if ( c == 0 && d == 0 ) return false;
+        }
+        return true;
+}
