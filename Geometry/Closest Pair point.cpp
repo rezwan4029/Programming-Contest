@@ -1,7 +1,8 @@
-#define SZ 100010
+const int SZ = 100010 ;
 
 point a[SZ];
 double minDist;
+int N ;
 
 bool cmp_x( point a , point b){
 	return a.x < b.x || a.x == b.x && a.y < b.y;
@@ -16,7 +17,7 @@ void Update( point a , point b) {
 	if (dist < minDist) minDist = dist ;
 }
 
-void solve (int l, int r){
+void solve (int l, int r) {
 	if(r - l <= 3 ){
         forab(i,l,r) forab(j,i+1,r) Update( a[i] , a[j]);
 		sort (a+l, a+r+1,cmp_y);
@@ -37,8 +38,8 @@ void solve (int l, int r){
 	}
 }
 
-void Closest_Pair(int n){
-    sort(a,a+n,cmp_x);
+void Closest_Pair(){
+    sort(a,a+N,cmp_x);
     minDist = 1E20 ;
-    solve(0,n-1);
+    solve(0,N-1);
 }
