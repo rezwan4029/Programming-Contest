@@ -18,14 +18,17 @@ struct point {
         x += t.x;
         y += t.y;
     }
-    point operator+(const point  &k)const {
+    point operator+(point k){
         return point(x + k.x , y + k.y );
     }
-    point operator-(const point  &k)const {
+    point operator-(point k){
         return point(x - k.x , y - k.y );
     }
-    point operator*(const double k) {
+    point operator*(double k) {
         return point(k * x , k * y );
+    }
+    point operator/(double k) {
+        return point(x / k , y/k );
     }
     point rotleft(){
         return point(-y,x);
@@ -51,6 +54,7 @@ struct point {
     bool collinear(const point &p1, const point &p2)const  {
         return (p1.y - y) * (p2.x - x) == (p2.y - y) * (p1.x - x);
     }
+
     inline double cross(const point &i)const
     {
         return x*i.y-y*i.x;
