@@ -62,6 +62,7 @@ bool SegmentsIntersect(point a, point b, point c, point d) {
 // with line passing through c and d, assuming that unique
 // intersection exists; for segment intersection, check if
 // segments intersect first
+// **use LinesParallel and LinesColliner to detect wether they intersect
 point ComputeLineIntersection(point a, point b, point c, point d) {
   b=b-a; d=c-d; c=c-a;
   assert(dot(b, b) > EPS && dot(d, d) > EPS);
