@@ -1,27 +1,26 @@
-double dot(point p, point q)     { return p.x*q.x+p.y*q.y; }
-double dist2(point p, point q)   { return dot(p-q,p-q); }
-double cross(point p, point q)   { return p.x*q.y-p.y*q.x; }
 
 // project point c onto line through a and b
 // assuming a != b
-point ProjectPointLine(point a, point b, point c) {
-  return a + (b-a)*dot(c-a, b-a)/dot(b-a, b-a);
+point ProjectPointLine(point a, point b, point c)
+{
+    return a + (b-a)*(c-a).dot(b-a) / (b-a).dot(b-a);
 }
 
-
 // project point c onto line segment through a and b
-point ProjectPointSegment(point a, point b, point c) {
-  double r = dot(b-a,b-a);
-  if (fabs(r) < EPS) return a;
-  r = dot(c-a, b-a)/r;
-  if (r < 0) return a;
-  if (r > 1) return b;
-  return a + (b-a)*r;
+point ProjectPointSegment(point a, point b, point c)
+{
+    double r = (b-a).dot(b-a);
+    if (fabs(r) < EPS) return a;
+    r = (c-a).dot(b-a)/r;
+    if (r < 0) return a;
+    if (r > 1) return b;
+    return a + (b-a)*r;
 }
 
 // compute distance from c to segment between a and b
-double DistancePointSegment(point a, point b, point c) {
-  return sqrt(dist2(c, ProjectPointSegment(a, b, c)));
+double DistancePointSegment(point a, point b, point c)
+{
+    return c.dis( ProjectPointSegment(a, b, c) );
 }
 
 
@@ -33,13 +32,13 @@ double DistancePointPlane(double x, double y, double z, double a, double b, doub
 
 // determine if lines from a to b and c to d are parallel or collinear
 bool LinesParallel(point a, point b, point c, point d) {
-  return fabs(cross(b-a, c-d)) < EPS;
+  return fabs( (b-a).cross(c-d)) < EPS;
 }
 
 bool LinesCollinear(point a, point b, point c, point d) {
   return LinesParallel(a, b, c, d)
-      && fabs(cross(a-b, a-c)) < EPS
-      && fabs(cross(c-d, c-a)) < EPS;
+      && fabs( (a-b).cross( a-c) ) < EPS
+      && fabs( (c-d).cross(c-a) ) < EPS;
 }
 
 
@@ -48,10 +47,13 @@ bool LinesCollinear(point a, point b, point c, point d) {
 // intersection exists; for segment intersection, check if
 // segments intersect first
 // **use LinesParallel and LinesColliner to detect wether they intersect
-point ComputeLineIntersection(point a, point b, point c, point d) {
-  b=b-a; d=c-d; c=c-a;
-  assert(dot(b, b) > EPS && dot(d, d) > EPS);
-  return a + b*cross(c, d)/cross(b, d);
+point ComputeLineIntersection(point a, point b, point c, point d)
+{
+    b = b - a ;
+    d = c - d ;
+    c = c - a ;
+    assert( b.dot(b) > EPS && d.dot(d) > EPS);
+    return a + b* c.cross(d) / b.cross(d) ;
 }
 
 // compute center of circle given three points
@@ -68,9 +70,7 @@ vector<point> CircleLineIntersection(point a, point b, point c, double r) {
    vector<point> ret;
   b = b-a;
   a = a-c;
-  double A = dot(b, b);
-  double B = dot(a, b);
-  double C = dot(a, a) - r*r;
+  double A = b.dot(b) , B = a.dot(b) , C = a.dot(a) - r*r;
   double D = B*B - A*C;
   if (D < -EPS) return ret;
   ret.push_back(c+a+b*(-B+sqrt(D+EPS))/A);
@@ -83,7 +83,7 @@ vector<point> CircleLineIntersection(point a, point b, point c, double r) {
 // with circle centered at b with radius R
 vector<point> CircleCircleIntersection(point a, point b, double r, double R) {
   vector<point> ret;
-  double d = sqrt(dist2(a, b));
+  double d = a.dis(b);
   if (d > r+R || d+min(r, R) < max(r, R)) return ret;
   double x = (d*d-R*R+r*r)/(2*d);
   double y = sqrt(r*r-x*x);
