@@ -28,10 +28,10 @@ struct point3D{
     double dot(point3D p){
         return x*p.x + y*p.y + z*p.z ;
     }
-    point3D det(point3D p){ // or can say point a * point b / CROSS
+    point3D cross(point3D p){
         return point3D( y*p.z - p.y*z , p.x*z - x*p.z , x*p.y - p.x*y );
     }
-    double distance(point3D p){
+    double dis(point3D p){
         return sqrt((p.x-x)*(p.x-x)+(p.y-y)*(p.y-y)+(p.z-z)*(p.z-z));
     }
     void normalize(){
@@ -61,21 +61,21 @@ struct line3D{
         b.input();
     }
     double length(){
-        return a.distance(b);
+        return a.dis(b);
     }
     bool pointonseg(point3D p){ // not checked
-        EQ( (p-a).det(p-b).len() ) == 0 && EQ( (a-p).dot(b-p) ) <= 0 ;
+        EQ( (p-a).cross(p-b).len() ) == 0 && EQ( (a-p).dot(b-p) ) <= 0 ;
     }
     double dispointtoline(point3D p){ // not checked
-        return ((b-a).det(p-a)).len()/ a.distance(b) ;
+        return ((b-a).cross(p-a)).len()/ a.dis(b) ;
     }
     point3D lineprog(point3D p){ // not checked
-        return a + ( (b-a).trunc( ((b-a)).dot(p-a)  /b.distance(a)));
+        return a + ( (b-a).trunc( ((b-a)).dot(p-a)  /b.dis(a)));
     }
 };
 
 int opposite(point3D p,point3D q,point3D a,point3D b,point3D c){
-    point3D v = (b-a).det(c-a);
+    point3D v = (b-a).cross(c-a);
     double x = v.dot(p-a) , y = v.dot(q-a);
     return EQ( x * y ) <= 0;
 }
@@ -91,7 +91,7 @@ bool segCrossTri(point3D p,point3D q,point3D a,point3D b,point3D c){
 double SegmentToPointDis(point3D a , point3D b , point3D c ){
     if( (b-a).dot(c-a) < 0 ) return (c-a).len();
     if( (a-b).dot(c-b) < 0 ) return (c-b).len();
-    point3D C = (b-a).det(c-a);
+    point3D C = (b-a).cross(c-a);
     return C.len() / (a-b).len();
 }
 //rotate the line pr to theta
