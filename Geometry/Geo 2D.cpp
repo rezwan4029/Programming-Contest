@@ -1,3 +1,12 @@
+// find angle of <ABC
+// angle find in degree for radiant use x*180/PI
+double find_angle(point A, point B, point C) { 
+    double x = B.sqrdis(C);
+    double y = C.sqrdis(A);
+    double z = A.sqrdis(B);
+    return acos((z*z + x*x - y*y)/(2*z*x));
+}
+
 
 // project point c onto line through a and b
 // assuming a != b
