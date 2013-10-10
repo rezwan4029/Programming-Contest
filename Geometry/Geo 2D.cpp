@@ -1,3 +1,11 @@
+int turn( point O , point A , point B){ //
+    double res = (A.x - O.x) * (B.y - O.y) - (A.y - O.y) * (B.x - O.x);
+    if( res < 0 ) return -1 ; // O->A->B is a right turn
+    if( res > 0 ) return  1 ; // O->A->B is a left turn
+    return 0; // O->A->B is a straight line / co-linear
+}
+
+
 // find angle of <ABC
 // angle find in degree for radiant use x*180/PI
 double find_angle(point A, point B, point C) { 
