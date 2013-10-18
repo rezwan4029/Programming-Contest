@@ -9,9 +9,9 @@ int turn( point O , point A , point B){ //
 // find angle of <ABC
 // angle find in degree for radiant use x*180/PI
 double find_angle(point A, point B, point C) { 
-    double x = B.sqrdis(C);
-    double y = C.sqrdis(A);
-    double z = A.sqrdis(B);
+    double x = B.dis(C);
+    double y = C.dis(A);
+    double z = A.dis(B);
     return acos((z*z + x*x - y*y)/(2*z*x));
 }
 
