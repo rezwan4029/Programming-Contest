@@ -63,6 +63,27 @@ string toString(ll number){
     return ss.str();
 }
 
+//convert Integer to hexadecimal
+string Int2Hex(ll n){
+    string hex ;
+    while(n) {
+        int mod = n % 16 ;
+        if( mod == 10 ) hex += 'A';
+        else if( mod == 11 ) hex += 'B';
+        else if( mod == 12 ) hex += 'C';
+        else if( mod == 13 ) hex += 'D';
+        else if( mod == 14 ) hex += 'E';
+        else if( mod == 15 ) hex += 'F';
+        else hex += ( mod + '0');
+        n /= 16;
+    }
+    reverse(all(hex));
+    return hex;
+}
+
+//convert hexadecimal to Integer
+ll Hex2Int(string s){ ll x ; std::stringstream ss; ss << std::hex << s; ss >> x; return x; }
+
 //convert Integer to Binary
 string i2b(ll a) {
     string s ;
