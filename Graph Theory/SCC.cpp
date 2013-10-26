@@ -1,6 +1,6 @@
 //all are 1 indexed Graph
 
-const int MX = 10005; // nodes number
+const int MX = 10005;
 vi adj[MX],Radj[MX],order,Comp;
 bool used[MX];
 int newCompId[MX];
@@ -9,7 +9,7 @@ int N , M;
 void dfs1(int u) {
     used[u] = true ;
     forstl(it,adj[u]) if( !used[ *it ] ) dfs1( *it );
-    order.pb(u); // entrying in topolist acording to time to complete task
+    order.pb(u);
 }
 
 void dfs2(int u , int scc ){
@@ -54,11 +54,15 @@ void Zip(){
     }
 }
 
-int main(){
-    //freopen("in.txt", "r", stdin);
-    Input();
+void Kosaraju(){
     For(i,N) if( !used[i] ) dfs1(i);
     ms(used,false);
     Zip();
+}
+
+int main(){
+    //freopen("in.txt", "r", stdin);
+    Input();
+    Kosaraju();
     Reset();
 }
