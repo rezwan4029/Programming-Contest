@@ -66,3 +66,25 @@ int main(){
     Kosaraju();
     Reset();
 }
+
+/*
+8 14
+1 2
+3 1
+2 3
+2 4
+3 4
+2 5
+5 6
+6 4
+4 6
+5 7
+7 5
+8 8
+7 8
+6 8
+No.1 SCC components are ->   1 3 2
+No.2 SCC components are ->   5 7
+No.3 SCC components are ->   4 6
+No.4 SCC components are ->   8
+*/
