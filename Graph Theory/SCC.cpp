@@ -24,7 +24,7 @@ void Reset(){
         adj[i].clear();
         Radj[i].clear();
     }
-    ms(newCompId,false);
+    ms(newCompId,0);
     ms(used,false);
     order.clear();
 }
