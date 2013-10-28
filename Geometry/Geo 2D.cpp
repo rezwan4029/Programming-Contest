@@ -1,3 +1,9 @@
+int EQ(double d)
+{
+    if ( fabs(d) < EPS ) return 0;
+    return d > EPS ? 1 : -1 ;
+}
+
 int turn( point O , point A , point B){ //
     double res = (A.x - O.x) * (B.y - O.y) - (A.y - O.y) * (B.x - O.x);
     if( res < 0 ) return -1 ; // O->A->B is a right turn
