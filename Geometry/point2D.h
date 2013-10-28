@@ -54,14 +54,21 @@ struct point {
     bool collinear(const point &p1, const point &p2)const  {
         return (p1.y - y) * (p2.x - x) == (p2.y - y) * (p1.x - x);
     }
-
-    inline double cross(const point &i)const
+    double cross(const point &i)const
     {
         return x*i.y-y*i.x;
     }
-    inline double dot(const point &i)const
+    double dot(const point &i)const
     {
         return x*i.x+y*i.y;
+    }
+    // মূলবিন্দু (0,0)  থেকে r দুরত্তে  নতুন একটি বিন্দু তৈরী করে যা (০,০) এবং বর্তমান বিন্দুর সাথে co-linear
+    point trunc(double r)
+    {
+        double l = hypot(x,y);
+        if ( !EQ(l) )return *this;
+        r /= l ;
+        return point(x*r,y*r);
     }
     bool in_box(const point &a, const point &b) const { // rectangle : a = leftDown , b = rightTop
         double lox = min(a.x, b.x), hix = max(a.x, b.x);
