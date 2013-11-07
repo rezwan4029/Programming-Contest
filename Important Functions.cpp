@@ -107,3 +107,9 @@ bool isPalindrome(string s ){
     rep(i,len/2)if(s[i] != s[len - i - 1 ] ) return false ;
     return true;
 }
+
+int strMod(string Num , int md ){
+     int rem = 0 , len = Num.size();
+     for( int i = 0 ; i < len ; i++ ) rem = ( ( rem * 10 ) + ( Num[i]-'0') ) % md ;
+     return ( rem == 0 ) ; // returns true if Num is divisible by md
+}
