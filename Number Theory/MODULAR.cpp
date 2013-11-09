@@ -63,7 +63,7 @@ pii chinese_remainder_theorem(int x, int a, int y, int b) {
 // Chinese remainder theorem: find z such that
 // z % x[i] = a[i] for all i. Note that the solution is
 // unique modulo M = lcm_i (x[i]). Return (z,M). On failure, M = -1.
-pii chinese_remainder_theorem(const ve<int> &x, const ve<int> &a) {
+pii chinese_remainder_theorem(const vector<int> &x, const vector<int> &a) {
   pii ret = make_pair(a[0], x[0]);
   for (int i = 1; i < x.size(); i++) {
     ret = chinese_remainder_theorem(ret.second, ret.first, x[i], a[i]);
