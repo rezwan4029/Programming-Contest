@@ -17,9 +17,9 @@ string decimalToRoman( int n ){
 int romanToDecimal(string str){
     if(str=="") return 0;
     int res=0,j,m=0;
-    string :: iterator p=str.end();
+    string :: iterator p = str.end();
     const char *q;
-    for(--p;;p--) {
+    for(--p ; ; p--) {
         for(q="IVXLCDM",j=0;*q;q++,j++) if(*p==*q)
             res+=((j>=m)?m=j,1:-1)*(1+j%4/2*9)*(1+j/4*99)*(1+j%2*4);
         if(p==str.begin()) break;
