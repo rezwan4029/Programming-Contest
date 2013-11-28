@@ -21,21 +21,23 @@ void Init(int s) {
     d[s] = 0;
 }
 
-bool Bellman(int s){
+bool Bellman(int s) {
     Init(s);
     bool updated = false ;
-    rep(u,N){
+    rep(step,N) {
         updated = false ;
-        if( d[u] == INF ) continue ;
-        forstl(it,E[u]) {
-            int v = it->v , w = it->w ;
-            if (d[v] > d[u] + w ) {
-                d[v] = d[u] + w;
-                pred[v] = u;
-                updated = true ;
+        rep(u,N) {
+            if( d[u] == INF ) continue ;
+            forstl(it,E[u]) {
+                int v = it->v , w = it->w ;
+                if (d[v] > d[u] + w ) {
+                    d[v] = d[u] + w;
+                    pred[v] = u;
+                    updated = true ;
+                }
             }
         }
-        if(!updated)break;
+        if( !updated )break;
     }
     return ( updated == false );
 }
@@ -58,9 +60,13 @@ vi getPath(int u ) { // u = destinition
     return Path;
 }
 
-int main() {
+
+int main(){
     Input();
-    bool ok = Bellman(0) ; // source 0 ** 0 indexed
-    if (ok) getPath(N-1); // destinition N-1
-    else puts( "Containing negative cycle" );
+    bool ok = Bellman(0) ; // source 0 ** o indexed
+    if (ok){
+        getPath(N-1); // destinition N-1
+    }
+    else cout << "Containing negative cycle";
+    cout << endl;
 }
