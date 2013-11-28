@@ -35,11 +35,11 @@ void Dijstra(int src){
         if(Vis[currNode])continue;
         Vis[currNode] = true ;
         forstl( it , adj[currNode] ){
-            int nxtNode = it->v , nxtCost = it->w ;
-            if( currCost + nxtCost < d[nxtNode] || d[nxtNode] == -1 ){
-                d[nxtNode] = currCost + nxtCost ;
-                Q.push( Node( nxtNode , d[nxtNode] ) );
-                pred[nxtNode] = currNode ;
+            int vv = it->v , cc = it->w ;
+            if( currCost + cc < d[ vv ] || d[ vv ] == -1 ){
+                d[ vv ] = currCost + cc ;
+                Q.push( Node( vv , d[ vv ] ) );
+                pred[ vv ] = currNode ;
             }
         }
     }
