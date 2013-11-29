@@ -1,17 +1,14 @@
 #define SZ 100007
 
-const int INF = 1e8;
-
 int N , M , d[SZ] , pred[SZ];
-vi Path ;
 
 struct Edge {
-    int v, w;
+    int u, v, w;
     Edge(){}
-    Edge(int _v, int _w) : v(_v), w(_w) {}
+    Edge(int _u , int _v, int _w) : u(_u) , v(_v), w(_w) {}
 };
 
-vector<Edge> E[SZ];
+Edge edges[SZ];
 
 void Init(int s) {
     rep(i,N+1){
@@ -21,51 +18,40 @@ void Init(int s) {
     d[s] = 0;
 }
 
-bool Bellman(int s) {
-    Init(s);
-    bool updated = false ;
-    rep(step,N) {
-        updated = false ;
-        rep(u,N) {
-            if( d[u] == INF ) continue ;
-            forstl(it,E[u]) {
-                int v = it->v , w = it->w ;
-                if (d[v] > d[u] + w ) {
-                    d[v] = d[u] + w;
-                    pred[v] = u;
-                    updated = true ;
-                }
-            }
-        }
-        if( !updated )break;
+void relax(int u, int v, int w) {
+    if (d[v] > d[u] + w && d[u] != INF ) {
+        d[v] = d[u] + w;
+        pred[v] = u;
     }
-    return ( updated == false );
+}
+
+bool Bellman(int s)
+{
+    Init(s);
+    For(k,N-1) rep(i,M)  relax( edges[i].u , edges[i].v , edges[i].w);
+    rep(i,M) if (d[edges[i].v] > d[edges[i].u] + edges[i].w) return false;
+    return true;
 }
 
 void Input(){
     cin >> N >> M ;
     rep(i,M){
         int u = II , v  = II , w = II ;
-        E[u].pb( Edge(v,w) );
+        edges[i] =  Edge(u, v, w) ;
     }
 }
 
-vi getPath(int u ) { // u = destinition
-    Path.clear();
-    while( u != -1 ){
-        Path.pb(u);
-        u = pred[u];
-    }
-    reverse(all(Path));
-    return Path;
+void printPath(int u ){
+    if(u == -1 )return ;
+    printPath( pred[u] );
+    cout << u << " ";
 }
 
-
-int main(){
+int main() {
     Input();
-    bool ok = Bellman(0) ; // source 0 ** o indexed
+    bool ok = Bellman(1) ; // source 1
     if (ok){
-        getPath(N-1); // destinition N-1
+        printPath(N); // destinition N
     }
     else cout << "Containing negative cycle";
     cout << endl;
