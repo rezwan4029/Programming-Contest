@@ -20,7 +20,7 @@ void Init(int s) {
 
 void relax(int u, int v, int w) {
     if (d[v] > d[u] + w && d[u] != INF ) {
-        d[v] = d[u] + w;
+        d[v] = max( -INF , d[u] + w ) ; // handling integer overflow
         pred[v] = u;
     }
 }
