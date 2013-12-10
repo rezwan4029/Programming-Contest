@@ -5,8 +5,8 @@ bool isVowel(char s){
 }
 
 //compute b^p
-ll Pow(ll  b,ll  p){
-    ll  ret = 1;
+Long Pow(Long  b,Long  p){
+    Long  ret = 1;
     while(p){
         if(p&1) ret *= b ;
         p >>= (1ll) , b *= b ;
@@ -15,8 +15,8 @@ ll Pow(ll  b,ll  p){
 }
 
 //compute b^p%m
-ll BigMod(ll  b,ll  p ,ll  m ){
-     ll  ret = 1 ;
+Long BigMod(Long  b,Long  p ,Long  m ){
+     Long  ret = 1 ;
      while(p)  {
         if(p&1) ret = (ret * b ) % m ;
         p >>= (1ll) , b = (b*b)%m ;
@@ -25,18 +25,18 @@ ll BigMod(ll  b,ll  p ,ll  m ){
 }
 
 //compute gcd of (a,b)
-ll GCD(ll a , ll b){
+Long GCD(Long a , Long b){
     while(b) b ^=  a ^= b ^= a %= b ;
     return a;
 }
 
 //compute lcm of (a,b)
-ll LCM(ll a , ll b) {
+Long LCM(Long a , Long b) {
      return (a / GCD(a,b)*b);
 }
 
 //swap two variables
-void SWAP(ll &a, ll &b){
+void SWAP(Long &a, Long &b){
     a ^= b ;
     b = a ^ b ;
     a ^= b;
@@ -50,21 +50,21 @@ bool isSubString(string t , string p ){
 }
 
 //convert String to Integer
-ll toInt(string s){
-    ll r = 0 ;
+Long toInt(string s){
+    Long r = 0 ;
     istringstream sin(s); sin>>r;
     return r;
 }
 
 //convert Integer to String
-string toString(ll number){
+string toString(Long number){
     stringstream ss;
     ss << number;
     return ss.str();
 }
 
 //convert Integer to hexadecimal
-string Int2Hex(ll n){
+string Int2Hex(Long n){
     string hex ;
     while(n) {
         int mod = n % 16 ;
@@ -82,10 +82,10 @@ string Int2Hex(ll n){
 }
 
 //convert hexadecimal to Integer
-ll Hex2Int(string s){ ll x ; std::stringstream ss; ss << std::hex << s; ss >> x; return x; }
+Long Hex2Int(string s){ Long x ; std::stringstream ss; ss << std::hex << s; ss >> x; return x; }
 
 //convert Integer to Binary
-string i2b(ll a) {
+string i2b(Long a) {
     string s ;
     do { s += (a&1) + '0' ,  a >>= 1; }while(a);
     reverse(all(s));
