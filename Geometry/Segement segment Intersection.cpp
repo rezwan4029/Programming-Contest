@@ -26,3 +26,21 @@ inline bool Intersect(const point &p1, const point &p2, const point &p3, const p
     if( !d2 && onsegment(p3, p4, p2)) return true;
     return false;
 }
+
+
+/*******************************************************************************************************************/
+
+struct Seg { point s, e; };
+
+int SegmentIntersection(Seg a, Seg b, point &p) {
+    double a1 = a.s.y - a.e.y, b1 = -a.s.x + a.e.x;
+    double a2 = b.s.y - b.e.y, b2 = -b.s.x + b.e.x;
+    double c1 = a1 * a.s.x + b1*a.s.y;
+    double c2 = a2 * b.s.x + b2*b.s.y;
+    double D =  a1 * b2  - a2 * b1;
+    double Dx = c1 * b2  - c2 * b1;
+    double Dy = a1 * c2  - a2 * c1;
+    if( fabs(D) < EPS ) return 0; // NONE or LINE
+    p.x = Dx/D , p.y = Dy/D;
+    return onsegment(a.s , a.e , p) && onsegment(b.s , b.e , p) ;
+}
