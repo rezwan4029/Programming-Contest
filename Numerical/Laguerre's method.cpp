@@ -5,7 +5,6 @@ typedef vector<cdbl> poly;
 pair<poly, cdbl> horner(poly a, cdbl x0) {
   int n = a.size();
   poly b = poly(max(1, n - 1));
-
   for(int i = n - 1; i > 0; i-- )
     b[i - 1] = a[i] + (i < n - 1 ? b[i] * x0 : 0);
   return make_pair(b, a[0] + b[0] * x0);
