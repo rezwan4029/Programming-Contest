@@ -67,7 +67,7 @@ int lca(int p , int q) {
     }
     res.ff = min(res.ff , min( minE[p][0] , minE[q][0]));
     res.ss = max(res.ss , max( maxE[p][0] , maxE[q][0]));
-    return T[p];
+    return P[p][0]; // T[p] 
 }
 void Input(){
     Reset();
