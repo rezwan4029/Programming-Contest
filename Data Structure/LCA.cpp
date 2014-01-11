@@ -91,6 +91,32 @@ int getMaxRoad(int x , int y){ /** find minimum road which is used in path x to 
     lca(x,y);
     return res.ss;
 }
+int getKth(int p , int q , int k){ // find Kth node walking from p to q
+    int a = lca(p,q) , d ;
+    if( a == p ){ // ans lies on the q side
+        d = L[q] - L[p] + 1 ;
+        swap(p,q);
+        k = d - k + 1 ;
+    }
+    else if( a == q ) ; // do nothing as ans lies on p side
+    else {
+        if( k > L[p] - L[a] + 1 ) { // if k lies form p to lca + lca to ... means ans is on the q side so substact the k from p to lca dist
+            d = L[p] + L[q] - 2 * L[a] + 1 ;
+            k = d - k + 1 ;
+            swap(p,q);
+        }
+        else ; // do nothing as k lies from p to under the lca means it is in p side
+    }
+    int lg ; for( lg = 1 ; (1 << lg) <= L[p] ; ++lg ); lg--;
+    k--;
+    for( int i = lg ; i >= 0 ; i-- ){
+        if( (1 << i ) <= k ) {
+            p = P[p][i];
+            k -= ( 1 << i );
+        }
+    }
+    return p;
+}
 int main(){
 #ifdef LOCAL
          FI ;
