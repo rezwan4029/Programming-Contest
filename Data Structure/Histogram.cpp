@@ -1,17 +1,22 @@
-#define SZ 2007
-int Hist[SZ];
-
-int Histogram(int n)
-{
-    // Hist has values in 1..to..n
-    int top = 1, stk[SZ], ret = 0;
-    Hist[0] = stk[0] = Hist[++n] = 0;
-    FOR(i,n){
-        while( top > 1 && Hist[ stk[ top - 1 ] ] >= Hist[i] ){
-             ret = max( ret, Hist[ stk[top - 1 ] ] * ( i - stk[ top - 2 ] - 1 ) );
-             top--;
+//** 0 based indexing */
+int H[MX] ;
+int Histogram() {
+    stack<int>Stk;
+    int Ans = 0 , pos = 0 , top , Area_With_Top ;
+    while( pos < N ){
+        if( Stk.empty() || H[ Stk.top() ] <= H[pos] ) Stk.push(pos++);
+        else {
+            top = Stk.top() ;
+            Stk.pop();
+            Area_With_Top = H[top] * ( Stk.empty() ? pos : pos - Stk.top() - 1 );
+            Ans = max( Ans , Area_With_Top );
         }
-        stk[ top++ ] = i ;
     }
-    return ret;
+    while( !Stk.empty() ){
+        top = Stk.top();
+        Stk.pop();
+        Area_With_Top = H[top] * ( Stk.empty() ? pos : pos - Stk.top() - 1 );
+        Ans = max( Ans , Area_With_Top );
+    }
+    return Ans ;
 }
