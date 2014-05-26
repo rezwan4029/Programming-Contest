@@ -1,19 +1,16 @@
-#define PrimeLIMIT 5000100
-#define MAX_TOTAL 350000
-
-ll prime[PrimeLIMIT / 64], pr[MAX_TOTAL], prlen;
-bool isPrime[PrimeLIMIT];
-#define gP(n) (prime[n>>6]&(1<<((n>>1)&31)))
-#define rP(n) (prime[n>>6]&=~(1<<((n>>1)&31)))
-
+const int MX = 1e6 + 7 ;
+vector<int> pr ;
+bool isPrime[MX];
+int BT[MX/64];
 void sieve() {
-	memset( prime, -1, sizeof( prime ) );
-	ll sqrtN = (ll) sqrt ( ( double ) PrimeLIMIT ) + 1;
-	
-	for(ll i = 3; i < sqrtN; i += 2 ) if( gP( i ) )
-		for( ll j = i * i, i2 = i << 1; j < PrimeLIMIT; j += i2 ) rP( j );
-	
-	pr[prlen++] = 2;
-	isPrime[2] = true ;
-	for(ll i = 3; i < PrimeLIMIT; i += 2 ) if( gP( i ) ) pr[ prlen++ ] = i , isPrime[i] = true ;
+    memset( BT , -1, sizeof BT );
+    #define gP(n) ( BT[n>>6] &  (1<<((n>>1)&31) ) )
+    #define rP(n) ( BT[n>>6] &=~(1<<((n>>1)&31) ) )
+    int SQ = sqrt (MX) + 1;
+    for(int i = 3 ; i < SQ; i += 2 ) if( gP( i ) )
+            for( int j = i * i , k = i * 2 ; j < MX; j += k ) rP( j );
+    pr.push_back(2);
+    isPrime[2] = true ;
+    for(int i = 3; i < MX; i += 2 )
+        if( gP( i ) ) pr.push_back(i) , isPrime[i] = true ;
 }
