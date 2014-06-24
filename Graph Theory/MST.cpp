@@ -1,4 +1,4 @@
-#define SZ 100007
+#define MX 100007
 struct edge{
     int u,v,w;
     edge( int a ,int b, int c){
@@ -9,11 +9,11 @@ struct edge{
 
 bool operator < ( edge a ,edge b){  return a.w < b.w ; }
 
-int prev[SZ];
+int par[MX];
 
 int Parent(int i){
-    if(i==prev[i])return i;
-    return ( prev[i] = Parent( prev[i] ) );
+    if(i==par[i])return i;
+    return ( par[i] = Parent( par[i] ) );
 }
 
 int isUnion(int a,int b){
@@ -21,12 +21,12 @@ int isUnion(int a,int b){
 }
 
 void makeUnion(int a,int b ){
-    prev[ Parent(a) ] = Parent(b);
+    par[ Parent(a) ] = Parent(b);
 }
 
 int MST(int n , edge *x , int e ){
   sort(x,x+e);
-  rep(i,n) prev[i] = i ;
+  rep(i,n) par[i] = i ;
   int mst = 0 , spanning_edges = 0 ;
   rep(i,e){
         if(!isUnion(x[i].u,x[i].v)){
@@ -39,7 +39,7 @@ int MST(int n , edge *x , int e ){
 }
 
 int main(){
-    edge Ed[SZ];
+    edge Ed[MX];
     int n , m  ;
     scanf("%d %d",&n,&m);
     rep(i,m){
