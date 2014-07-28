@@ -1,19 +1,18 @@
 struct node {
-  Long key, rnk, cnt;
-node *le, *ri;
-
-node (Long key = 0, Long rnk = rand ()) : key (key), rnk (rnk), cnt (1), le (0), ri (0) {}
+    Long key, rnk, cnt;
+    node *le, *ri;
+    node (Long key = 0, Long rnk = rand ()) : key (key), rnk (rnk), cnt (1), le (0), ri (0) {}
 };
 
 class treap {
-typedef node* pNode;
-pNode root;
+    typedef node* pNode;
+    pNode root;
 
     Long count (pNode cur) { return cur ? cur -> cnt : 0; }
     void updateCnt (pNode cur) { if (cur) cur -> cnt = 1 + count (cur -> le) + count (cur -> ri); }
 
-void split (pNode cur, pNode &le, pNode &ri, Long key) {
-if (!cur) { le = ri = 0; return; }
+    void split (pNode cur, pNode &le, pNode &ri, Long key) {
+        if (!cur) { le = ri = 0; return; }
         if (key < cur -> key ) split (cur -> le, le, cur -> le, key), ri = cur;
         else split (cur -> ri, cur -> ri, ri, key), le = cur;
         updateCnt (cur);
@@ -81,5 +80,5 @@ if (!cur) { le = ri = 0; return; }
         void insert (Long key, Long rnk = rand ()) { insert (root, new node (key, rnk)); }
         void insert_unique (Long key, Long rnk = rand ()) { if (!countEqual (root, key)) insert (root, new node (key, rnk)); }
         void erase (Long key, Long rnk = -1) { erase (root, key, rnk); }
-        Long operator [] (const int idx) { pNode cur = kThElement (root, idx); return cur ? cur -> key : LongONG_MIN; }
+        Long operator [] (const int idx) { pNode cur = kThElement (root, idx); return cur ? cur -> key : LONG_MIN; }
 };
