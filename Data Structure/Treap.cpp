@@ -1,17 +1,17 @@
 struct node {
-    Long key, rnk, cnt;
+    int key, rnk, cnt;
     node *le, *ri;
-    node (Long key = 0, Long rnk = rand ()) : key (key), rnk (rnk), cnt (1), le (0), ri (0) {}
+    node (int key = 0, int rnk = rand ()) : key (key), rnk (rnk), cnt (1), le (0), ri (0) {}
 };
 
 class treap {
     typedef node* pNode;
     pNode root;
 
-    Long count (pNode cur) { return cur ? cur -> cnt : 0; }
+    int count (pNode cur) { return cur ? cur -> cnt : 0; }
     void updateCnt (pNode cur) { if (cur) cur -> cnt = 1 + count (cur -> le) + count (cur -> ri); }
 
-    void split (pNode cur, pNode &le, pNode &ri, Long key) {
+    void split (pNode cur, pNode &le, pNode &ri, int key) {
         if (!cur) { le = ri = 0; return; }
         if (key < cur -> key ) split (cur -> le, le, cur -> le, key), ri = cur;
         else split (cur -> ri, cur -> ri, ri, key), le = cur;
@@ -32,7 +32,7 @@ class treap {
         updateCnt (cur);
     }
 
-    void erase (pNode &cur, Long key, Long rnk) {
+    void erase (pNode &cur, int key, int rnk) {
         if (!cur) return;
         if (cur -> key == key) {
          if (rnk == -1) rnk = cur -> rnk;
@@ -42,19 +42,19 @@ class treap {
         updateCnt (cur);
     }
 
-    Long countLess (pNode cur, Long key) {
+    int countLess (pNode cur, int key) {
         if (!cur) return 0;
         if (key <= cur -> key) return countLess (cur -> le, key);
         return 1 + count (cur -> le) + countLess (cur -> ri, key);
     }
 
-    Long countLessEqual (pNode cur, Long key) {
+    int countLessEqual (pNode cur, int key) {
         if (!cur) return 0;
         if (key < cur -> key) return countLessEqual (cur -> le, key);
         return 1 + count (cur -> le) + countLess (cur -> ri, key);
     }
 
-    Long countEqual (pNode cur, Long key) {
+    int countEqual (pNode cur, int key) {
      if (!cur) return 0;
      if (key == cur -> key) return 1 + countEqual (cur -> ri, key);
      return countEqual (key < cur -> key ? cur -> le : cur -> ri, key);
@@ -74,11 +74,12 @@ class treap {
 
     public:
         treap () { root = 0; srand (time (0)); }
-        Long size () { return count (root); }
+        int size () { return count (root); }
         void clear () { clear (root); root = 0; }
-        bool find (Long key) { return countEqual (root, key) ? true : false; }
-        void insert (Long key, Long rnk = rand ()) { insert (root, new node (key, rnk)); }
-        void insert_unique (Long key, Long rnk = rand ()) { if (!countEqual (root, key)) insert (root, new node (key, rnk)); }
-        void erase (Long key, Long rnk = -1) { erase (root, key, rnk); }
-        Long operator [] (const int idx) { pNode cur = kThElement (root, idx); return cur ? cur -> key : LONG_MIN; }
+        bool find (int key) { return countEqual (root, key) ? true : false; }
+        void insert (int key, int rnk = rand ()) { insert (root, new node (key, rnk)); }
+        void insert_unique (int key, int rnk = rand ()) { if (!countEqual (root, key)) insert (root, new node (key, rnk)); }
+        void erase (int key, int rnk = -1) { erase (root, key, rnk); }
+        int countLess(int key){ return countLess(root,key); }
+        int operator [] (const int idx) { pNode cur = kThElement (root, idx); return cur ? cur -> key : int_MIN; }
 };
