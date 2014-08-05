@@ -83,6 +83,21 @@ int getDistance(int x , int y){ /** find distance of path x to y **/
     int Ans = dist[x] + dist[y] - 2 * dist[a] ;
     return Ans;
 }
+int query(int r , int u , int v ){ /** If r is root of the tree , find lca of (u,v) */
+    pii p[7];
+    p[0].second = u ;
+    p[1].second = v ;
+    p[2].second = r ;
+    p[3].second = lca(r,u);
+    p[4].second = lca(r,v);
+    p[5].second = lca(u,v);
+    for( int i = 0 ; i < 6 ; i++ ){
+        int x = p[i].second ;
+        p[i].first = getDistance(x,r) + getDistance(x,u) + getDistance(x,v);
+    }
+    sort(p,p+6);
+    return p[0].second ;
+}
 int getMinRoad(int x , int y){ /** find maximum road which is used in path x to y **/
     lca(x,y);
     return res.ff;
