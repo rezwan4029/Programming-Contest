@@ -113,3 +113,25 @@ int strMod(string Num , int md ){
      for( int i = 0 ; i < len ; i++ ) rem = ( ( rem * 10 ) + ( Num[i]-'0') ) % md ;
      return ( rem == 0 ) ; // returns true if Num is divisible by md
 }
+
+void nextPalindrom(char str[], int size){
+	int mid = ( size - 1 ) >> 1;
+	int i = ((size & 1)==0) ? mid : mid - 1;
+	int j = mid + 1;
+	while( i >= 0 && str[i] == str[j] ) i--, j++;
+	if( i < 0 || str[i] < str[j] ){
+		i = mid;
+		str[i] = str[i] + 1;
+		while( i >= 0 && str[i] == ':' ){
+			str[i--] = '0';
+			str[i] = str[i] + 1;
+		}
+	}
+	i = ( size % 2 == 0 ) ? mid : mid - 1;
+	j = mid + 1;
+	while( i >= 0 ) str[j++] = str[i--];
+	if( str[0] == '0'){
+		str[0] = str[size] = '1';
+		str[size+1] = '\0';
+	}
+}
