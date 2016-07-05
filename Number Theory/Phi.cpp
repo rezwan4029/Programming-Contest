@@ -1,6 +1,6 @@
-ll  phi ( ll  n ) {
-	ll  i,res = n ;
-	for (  i = 2 ; i * i <= n ; ++ i )
+Long phi ( Long  n ) {
+	Long  res = n ;
+	for ( Long i = 2 ; i * i <= n ; ++ i )
 		if ( n % i == 0 ) {
 			while ( n % i == 0 )
 				n /= i ;
@@ -8,6 +8,21 @@ ll  phi ( ll  n ) {
 		}
 	if ( n > 1 ) res -= res / n ;
 	return res ;
+}
+
+const int MX = 1e5 + 7 ;
+int phi[MX + 7] ;
+void sievePHI(){
+	for( Long i = 2 ; i < MX ; i++){
+		if( phi[i] == 0 ){
+			phi[i] = i-1;
+			for( Long j = i * 2; j < MX; j += i){
+				if( phi[j] == 0 )phi[j] = j;
+				phi[j] /= i ;
+				phi[j] *= (i-1) ;
+			}
+		}
+	}
 }
 
 
